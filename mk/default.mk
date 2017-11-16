@@ -4,6 +4,8 @@ ifndef CONFIG_PLATFORM
 	CPPFLAGS+= -DPLATFORM_$(shell echo $(CONFIG_PLATFORM) | tr 'a-z' 'A-Z')=1
 endif
 
+include mk/platform-$(CONFIG_PLATFORM).mk
+
 # compiler and linker flags
 CFLAGS?= -Wall -Werror
 LDFLAGS?=
