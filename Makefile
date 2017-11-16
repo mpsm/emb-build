@@ -1,6 +1,5 @@
-ABS_TOPDIR:= $(patsubst %/,%,$(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
+TOPDIR:= $(patsubst %/,%,$(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
 CURDIR:= $(shell pwd)
-TOPDIR:= $(ABS_TOPDIR:$(CURDIR)%=.%)
 
 MKDIR:=  $(TOPDIR)/mk
 
