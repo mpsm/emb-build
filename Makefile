@@ -4,7 +4,8 @@ MKDIR:=  $(TOPDIR)/mk
 include $(MKDIR)/default.mk
 
 SRCDIR:= $(TOPDIR)/src
-OBJDIR:= $(TOPDIR)/obj
+BINDIR:= $(TOPDIR)/bin
+OBJDIR:= $(TOPDIR)/obj/$(ARCH)/$(CONFIG_PLATFORM)
 
 PLATFORMDIR:= $(SRCDIR)/platform/$(CONFIG_PLATFORM)
 
@@ -15,13 +16,14 @@ OBJDIRS= $(shell echo $(foreach srcfile, $(OBJS), $(dir $(srcfile))) | tr ' ' '\
 
 CPPFLAGS+= -I $(SRCDIR) -MMD -MP -MT $@ -MT $(@:.o=.d) -MF $(@:.o=.d)
 
-TARGET?= target
+TARGETNAME?= firmware
+TARGET= $(BINDIR)/$(TARGETNAME)
 
 # rules
 
 all: $(TARGET)
 
-$(TARGET): $(OBJS)
+$(TARGET): $(OBJS) | $(BINDIR)
 	@echo "### Linking $@"
 	$(CC) $(LDFLAGS) $^ -o $@
 
@@ -29,7 +31,7 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIRS)
 	@echo "### Building $@"
 	$(CC) $(CPPFLAGS) $(CFLAGS) -o $@ -c $<
 
-$(OBJDIRS):
+$(BINDIR) $(OBJDIRS):
 	mkdir -p $@
 
 -include $(DEPS)
@@ -38,7 +40,7 @@ clean:
 	rm -f $(OBJS)
 
 distclean:
-	rm -rf $(OBJDIR) $(TARGET)
+	rm -rf $(TOPDIR)/obj $(TOPDIR)/bin
 
 .PRECIOUS: $(DEPS)
 .PHONY: depend distclean clean all
