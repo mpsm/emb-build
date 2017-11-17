@@ -1,9 +1,11 @@
 #pragma once
 
+#include "config.h"
+
 // read text on this square thing on the board
 #define CPU_MK64FN1M0VLL12
 
-#define configTICK_RATE_HZ						200
+#define configTICK_RATE_HZ						1000
 #define configUSE_TICKLESS_IDLE					0
 #define configUSE_PREEMPTION					1
 #define configUSE_QUEUE_SETS					0
