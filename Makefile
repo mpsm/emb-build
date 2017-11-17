@@ -18,7 +18,7 @@ OBJDIRS= $(shell echo $(foreach srcfile, $(OBJS), $(dir $(srcfile))) | tr ' ' '\
 CPPFLAGS+= -I $(SRCDIR) -MMD -MP -MT $@ -MT $(@:.o=.d) -MF $(@:.o=.d)
 
 TARGETNAME?= firmware
-TARGET= $(BINDIR)/$(TARGETNAME)
+TARGET= $(BINDIR)/$(CONFIG_PLATFORM)-$(TARGETNAME)
 
 # rules
 
