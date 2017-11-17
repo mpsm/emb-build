@@ -1,0 +1,4 @@
+#!/bin/sh
+
+make CONFIG_PLATFORM=pc CONFIG_DEBUG=1
+make -r -R CONFIG_PLATFORM=frdm-k64
