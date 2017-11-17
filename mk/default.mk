@@ -5,6 +5,7 @@ ifndef CONFIG_PLATFORM
 endif
 
 include $(MKDIR)/platform-$(CONFIG_PLATFORM).mk
+SRCDIRS+= $(SRCDIR)/platform/$(CONFIG_PLATFORM)
 
 # compiler and linker flags
 CFLAGS?= -Wall -Werror

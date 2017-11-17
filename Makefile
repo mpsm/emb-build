@@ -2,16 +2,15 @@ TOPDIR:= $(patsubst %/,%,$(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
 CURDIR:= $(shell pwd)
 
 MKDIR:=  $(TOPDIR)/mk
+SRCDIR:= $(TOPDIR)/src
+SRCDIRS= $(SRCDIR)
 
 include $(MKDIR)/default.mk
 
-SRCDIR:= $(TOPDIR)/src
 BINDIR:= $(TOPDIR)/bin
 OBJDIR:= $(TOPDIR)/obj/$(ARCH)/$(CONFIG_PLATFORM)
 
-PLATFORMDIR:= $(SRCDIR)/platform/$(CONFIG_PLATFORM)
-
-SRCS= $(wildcard $(SRCDIR)/*.c) $(wildcard $(PLATFORMDIR)/*.c)
+SRCS= $(foreach srcdir, $(SRCDIRS), $(wildcard $(srcdir)/*.c))
 OBJS= $(patsubst $(SRCDIR)/%, $(OBJDIR)/%, $(SRCS:.c=.o))
 DEPS= $(OBJS:%.o=%.d)
 OBJDIRS= $(shell echo $(foreach srcfile, $(OBJS), $(dir $(srcfile))) | tr ' ' '\n' | sort | uniq)
