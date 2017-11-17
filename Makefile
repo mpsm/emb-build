@@ -10,8 +10,8 @@ include $(MKDIR)/default.mk
 BINDIR:= $(TOPDIR)/bin
 OBJDIR:= $(TOPDIR)/obj/$(ARCH)/$(CONFIG_PLATFORM)
 
-SRCS= $(foreach srcdir, $(SRCDIRS), $(wildcard $(srcdir)/*.c))
-OBJS= $(patsubst $(SRCDIR)/%, $(OBJDIR)/%, $(SRCS:.c=.o))
+SRCS+= $(foreach srcdir, $(SRCDIRS), $(wildcard $(srcdir)/*.c))
+OBJS+= $(patsubst $(SRCDIR)/%, $(OBJDIR)/%, $(SRCS:.c=.o))
 DEPS= $(OBJS:%.o=%.d)
 OBJDIRS= $(shell echo $(foreach srcfile, $(OBJS), $(dir $(srcfile))) | tr ' ' '\n' | sort | uniq)
 
