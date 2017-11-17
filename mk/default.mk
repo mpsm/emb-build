@@ -22,11 +22,10 @@ ifndef TOOLCHAIN
 TOOLCHAIN= 
 endif
 override CC= $(TOOLCHAIN)-gcc
-
+override AS= $(CC) -x assembler-with-cpp
 
 # compiler and linker flags
 CFLAGS?= -Wall -Werror
-LDFLAGS?=
 
 # debug options
 ifndef CONFIG_DEBUG
