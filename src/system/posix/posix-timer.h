@@ -3,7 +3,8 @@
 
 #include <system/base.h>
 #include <system/task.h>
-#include "timer.h"
+#include <system/timer.h>
+
 #include <stdbool.h>
 
 typedef struct {

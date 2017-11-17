@@ -26,7 +26,7 @@ all: $(TARGET)
 
 $(TARGET): $(OBJS) | $(BINDIR)
 	@echo "### Linking $@"
-	$(CC) $(LDFLAGS) $^ -o $@
+	$(CC) $^ $(LDFLAGS) -o $@
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIRS)
 	@echo "### Building $@"
