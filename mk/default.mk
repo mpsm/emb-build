@@ -7,6 +7,7 @@ endif
 # add platform files
 include $(MKDIR)/platform-$(CONFIG_PLATFORM).mk
 SRCDIRS+= $(SRCDIR)/platform/$(CONFIG_PLATFORM)
+CPPFLAGS+= -I $(SRCDIR)/platform/$(CONFIG_PLATFORM)
 
 # add system files
 ifndef SYSTEM
