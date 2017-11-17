@@ -28,7 +28,9 @@
 #define configUSE_COUNTING_SEMAPHORES			0
 #define configSUPPORT_STATIC_ALLOCATION			0
 #define configUSE_TASK_END_SCHEDULER   			0
-#define configASSERT(x) if((x)==0) { taskDISABLE_INTERRUPTS(); pulsePanic(RED); }
+
+/* TODO: define abort/assert */
+//#define configASSERT(x) if((x)==0) { taskDISABLE_INTERRUPTS(); pulsePanic(RED); }
 
 #define configGENERATE_RUN_TIME_STATS			0
 #define configUSE_STATS_FORMATTING_FUNCTIONS	0
