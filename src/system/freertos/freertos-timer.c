@@ -15,7 +15,7 @@ tmr_init(tmr_t *t, bool autoreload, timer_callback_t callback,
 {
     xTimerHandle handle;
 
-    handle = xTimerCreate((signed char *)name, TMR_CREATE_DEFAULT_PERIOD,
+    handle = xTimerCreate(name, TMR_CREATE_DEFAULT_PERIOD,
                           autoreload, t, callback);
     if (handle == NULL) {
         return (false);

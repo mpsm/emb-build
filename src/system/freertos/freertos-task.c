@@ -22,7 +22,7 @@ task_create(task_t *t, task_routine_t rt, void *arg, const char * const tname,
         return false;
     }
 
-    result = xTaskCreate((pdTASK_CODE)rt, (signed char *)tname,
+    result = xTaskCreate((pdTASK_CODE)rt, tname,
         (unsigned short)stack_size, arg, tskIDLE_PRIORITY + prio, &handle);
     *t = (task_t)handle;
 
