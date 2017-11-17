@@ -1,1 +1,2 @@
-ARCH= arm
+include $(MKDIR)/kx.mk
+SYSTEM= freertos

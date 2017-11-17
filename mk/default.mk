@@ -16,6 +16,13 @@ SRCDIRS+= $(SRCDIR)/system/$(SYSTEM)
 CPPFLAGS+= -DSYSTEM_CONFIG_TYPE_$(shell echo $(SYSTEM) | tr 'a-z' 'A-Z')=1
 include $(MKDIR)/system-$(SYSTEM).mk
 
+# toolchain
+ifndef TOOLCHAIN
+TOOLCHAIN= 
+endif
+override CC= $(TOOLCHAIN)-gcc
+
+
 # compiler and linker flags
 CFLAGS?= -Wall -Werror
 LDFLAGS?=
@@ -32,4 +39,4 @@ else
 endif
 
 # toolchain
-override CC= gcc
+
