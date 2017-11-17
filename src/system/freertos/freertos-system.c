@@ -8,7 +8,7 @@
 void
 system_init()
 {
-    __no_operation();
+
 }
 
 bool
