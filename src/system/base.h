@@ -10,7 +10,7 @@
 #  define SYSTEM_NO_WAIT                            ((portTickType)0)
 #  define SYSTEM_MAX_WAIT                           (portMAX_DELAY)
 #  define SYSTEM_TICK_RATE_MS                       (portTICK_RATE_MS)
-#  define SYSTEM_TASK_MODIFIER                      __task
+#  define SYSTEM_TASK_MODIFIER
 typedef portTickType system_tick_t;
 #elif SYSTEM_CONFIG_TYPE_POSIX == 1
 #  include <stdint.h>
