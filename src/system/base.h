@@ -30,6 +30,8 @@ typedef uint32_t system_tick_t;
 #  define SYSTEM_NO_WAIT                            ((uint32_t)0)
 #  define SYSTEM_MAX_WAIT                           (UINT32_MAX)
 #  define SYSTEM_TASK_MODIFIER
+#else
+#  error "Specify system type"
 #endif
 
 #if !defined(SYSTEM_NO_WAIT) || !defined(SYSTEM_MAX_WAIT)
