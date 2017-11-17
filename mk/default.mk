@@ -1,3 +1,6 @@
+# compiler and linker flags
+CFLAGS?= -Wall -Werror
+
 # platform definition
 ifndef CONFIG_PLATFORM
 	CONFIG_PLATFORM=pc
@@ -24,9 +27,6 @@ endif
 override CC= $(TOOLCHAIN)-gcc
 override AS= $(CC) -x assembler-with-cpp
 
-# compiler and linker flags
-CFLAGS?= -Wall -Werror
-
 # debug options
 ifndef CONFIG_DEBUG
 	CONFIG_DEBUG=0
@@ -37,6 +37,3 @@ ifeq ($(CONFIG_DEBUG), 1)
 else
 	CFLAGS+= -Os
 endif
-
-# toolchain
-

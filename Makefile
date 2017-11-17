@@ -26,15 +26,15 @@ all: $(TARGET)
 
 $(TARGET): $(OBJS) | $(BINDIR)
 	@echo "### Linking $@"
-	$(CC) $(CFLAGS) $^ $(LDFLAGS) -o $@
+	$(CC) $(CCFLAGS) $^ $(LDFLAGS) -o $@
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.s | $(OBJDIRS)
 	@echo "### Assembling $@"
-	$(AS) $(CPPFLAGS) $(CFLAGS) $(ASFLAGS) -o $@ -c $<
+	$(AS) $(CPPFLAGS) $(CCFLAGS) $(ASFLAGS) -o $@ -c $<
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIRS)
 	@echo "### Building $@"
-	$(CC) $(CPPFLAGS) $(CFLAGS) -o $@ -c $<
+	$(CC) $(CPPFLAGS) $(CCFLAGS) $(CFLAGS) -o $@ -c $<
 
 $(BINDIR) $(OBJDIRS):
 	mkdir -p $@
