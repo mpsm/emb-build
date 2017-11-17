@@ -72,8 +72,10 @@
  *----------------------------------------------------------*/
 /* Scheduler includes. */
 #include "FreeRTOSConfig.h"
-#include "FreeRTOS.h"
-#include "task.h"
+
+#include <FreeRTOS/FreeRTOS.h>
+#include <FreeRTOS/task.h>
+
 #include "portmacro.h"
 #include "portTicks.h" /* for CPU_CORE_CLK_HZ used in configSYSTICK_CLOCK_HZ */
 #if configSYSTICK_USE_LOW_POWER_TIMER
@@ -1243,10 +1245,10 @@ task.h is included from an application file. */
 #define MPU_WRAPPERS_INCLUDED_FROM_API_FILE
 
 /* Scheduler includes. */
-#include "FreeRTOS.h"
-#include "queue.h"
-#include "event_groups.h"
-#include "mpu_prototypes.h"
+#include <FreeRTOS/FreeRTOS.h>
+#include <FreeRTOS/queue.h>
+#include <FreeRTOS/event_groups.h>
+#include <FreeRTOS/mpu_prototypes.h>
 
 #ifndef __VFP_FP__
 	#error This port can only be used when the project options are configured to enable hardware floating point support.
