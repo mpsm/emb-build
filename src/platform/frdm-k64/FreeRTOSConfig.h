@@ -1,6 +1,7 @@
 #pragma once
 
 #include "config.h"
+#include "system_MK64F12.h"
 
 // read text on this square thing on the board
 #define CPU_MK64FN1M0VLL12
@@ -30,7 +31,7 @@
 #define configUSE_TASK_END_SCHEDULER   			0
 
 /* TODO: define abort/assert */
-//#define configASSERT(x) if((x)==0) { taskDISABLE_INTERRUPTS(); pulsePanic(RED); }
+#define configASSERT(x) if((x)==0) { taskDISABLE_INTERRUPTS(); for(;;){} }
 
 #define configGENERATE_RUN_TIME_STATS			0
 #define configUSE_STATS_FORMATTING_FUNCTIONS	0

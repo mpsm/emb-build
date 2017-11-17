@@ -1124,7 +1124,7 @@ __attribute__ ((naked)) void vPortPendSVHandler(void) {
 }
 /*-----------------------------------------------------------*/
 
-
+/* TODO: pcInterruptPriorityRegisters not defined if asser is not defined */
     void vPortValidateInterruptPriority( void )
     {
     uint32_t ulCurrentInterrupt;

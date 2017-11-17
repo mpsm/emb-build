@@ -6,3 +6,4 @@ $(error "Define FREERTOS_PORT")
 endif
 CFLAGS+= -I $(SRCDIR)/FreeRTOS/$(FREERTOS_PORT)
 SRCDIRS+= $(SRCDIR)/FreeRTOS/$(FREERTOS_PORT)
+SRCS+= $(SRCDIR)/FreeRTOS/heap/heap_1.c
