@@ -1,1 +1,2 @@
 # TODO
+SRCDIRS+= $(SRCDIR)/FreeRTOS
