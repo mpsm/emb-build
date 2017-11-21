@@ -1,6 +1,0 @@
-#!/bin/sh
-
-MKFLAGS="-r -R"
-
-make ${MKFLAGS} CONFIG_PLATFORM=pc CONFIG_DEBUG=1
-make ${MKFLAGS} CONFIG_PLATFORM=frdm-k64
