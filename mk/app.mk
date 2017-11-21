@@ -14,7 +14,7 @@ CPPFLAGS+= -I $(SRCDIR) -MMD -MP -MT $@ -MT $(@:.o=.d) -MF $(@:.o=.d)
 TARGET:= $(BINDIR)/$(APP)-$(PLATFORM)
 
 # target working directory
-TARGETOBJDIR:= $(OBJDIR)/$(PLATFORM)/$(APP)
+TARGETOBJDIR:= $(OBJDIR)/$(APP)/$(PLATFORM)
 
 # source, object and dep files
 SRCS+= $(foreach srcdir, $(SRCDIRS), $(wildcard $(srcdir)/*.c))
@@ -44,6 +44,8 @@ $(BINDIR) $(OBJDIRS):
 
 clean:
 	rm -f $(OBJS) $(TARGET)
+
+-include $(DEPS)
 
 .PRECIOUS: $(DEPS)
 .PHONY: clean all

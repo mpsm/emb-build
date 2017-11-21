@@ -21,15 +21,18 @@ export
 all:
 	$(call ALLAPSMAKE,all)
 	
+force:
+	@true
+
 # in case the target is specified directly
 $(OBJDIR) $(BINDIR):
 	mkdir -p $@
 
-$(BINDIR)/%:
+$(BINDIR)/%: force | $(BINDIR)
 	$(eval APP:=$(firstword $(subst -, ,$*)))
 	$(call APPMAKE,$@)
 
-$(OBJDIR)/%:
+$(OBJDIR)/%: force | $(OBJDIR)
 	$(eval APP:=$(firstword $(subst /, ,$*)))
 	$(call APPMAKE,$@)
 
