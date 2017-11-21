@@ -5,7 +5,7 @@ ifndef APP
 $(error "Specify application name.")
 endif
 SRCDIRS+= $(SRCDIR)/apps/$(APP)
-CPPFLAGS+= -DAPP="$(APP)"
+CPPFLAGS+= -DAPP="$(APP)" -I $(SRCDIR)/apps/$(APP)
 
 # flags
 CPPFLAGS+= -I $(SRCDIR) -MMD -MP -MT $@ -MT $(@:.o=.d) -MF $(@:.o=.d)
