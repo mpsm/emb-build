@@ -2,15 +2,13 @@
 CFLAGS?= -Wall -Werror
 
 # platform definition
-ifndef CONFIG_PLATFORM
-	CONFIG_PLATFORM=pc
-	CPPFLAGS+= -DPLATFORM_$(shell echo $(CONFIG_PLATFORM) | tr 'a-z' 'A-Z')=1
+ifndef PLATFORM
+	PLATFORM=pc
 endif
-
-# add platform files
-include $(MKDIR)/platform-$(CONFIG_PLATFORM).mk
-SRCDIRS+= $(SRCDIR)/platform/$(CONFIG_PLATFORM)
-CPPFLAGS+= -I $(SRCDIR)/platform/$(CONFIG_PLATFORM)
+include $(MKDIR)/platform-$(PLATFORM).mk
+CPPFLAGS+= -DPLATFORM_$(shell echo $(PLATFORM) | tr 'a-z' 'A-Z')=1
+CPPFLAGS+= -I $(SRCDIR)/platform/$(PLATFORM)
+SRCDIRS+= $(SRCDIR)/platform/$(PLATFORM)
 
 # add system files
 ifndef SYSTEM

@@ -1,52 +1,49 @@
-TOPDIR:= $(patsubst %/,%,$(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
-CURDIR:= $(shell pwd)
-
-MKDIR:=  $(TOPDIR)/mk
-SRCDIR:= $(TOPDIR)/src
-SRCDIRS= $(SRCDIR)
-
 include $(MKDIR)/default.mk
 
-BINDIR:= $(TOPDIR)/bin
-OBJDIR:= $(TOPDIR)/obj/$(ARCH)/$(CONFIG_PLATFORM)
+# add app files
+ifndef APP
+$(error "Specify application name.")
+endif
+SRCDIRS+= $(SRCDIR)/apps/$(APP)
+CPPFLAGS+= -DAPP="$(APP)"
 
-SRCS+= $(foreach srcdir, $(SRCDIRS), $(wildcard $(srcdir)/*.c))
-OBJS+= $(patsubst $(SRCDIR)/%, $(OBJDIR)/%, $(SRCS:.c=.o))
-DEPS= $(OBJS:%.o=%.d)
-OBJDIRS= $(shell echo $(foreach srcfile, $(OBJS), $(dir $(srcfile))) | tr ' ' '\n' | sort | uniq)
-
+# flags
 CPPFLAGS+= -I $(SRCDIR) -MMD -MP -MT $@ -MT $(@:.o=.d) -MF $(@:.o=.d)
 
-TARGETNAME?= firmware
-TARGET= $(BINDIR)/$(CONFIG_PLATFORM)-$(TARGETNAME)
+# specify target
+TARGET:= $(BINDIR)/$(APP)-$(PLATFORM)
 
-# rules
+# target working directory
+TARGETOBJDIR:= $(OBJDIR)/$(PLATFORM)/$(APP)
 
+# source, object and dep files
+SRCS+= $(foreach srcdir, $(SRCDIRS), $(wildcard $(srcdir)/*.c))
+OBJS+= $(patsubst $(SRCDIR)/%, $(TARGETOBJDIR)/%, $(SRCS:.c=.o))
+DEPS= $(OBJS:%.o=%.d)
+
+# object directories
+OBJDIRS= $(shell echo $(foreach objfile, $(OBJS), $(dir $(objfile))) | tr ' ' '\n' | sort | uniq)
+
+# build rules
 all: $(TARGET)
 
 $(TARGET): $(OBJS) | $(BINDIR)
 	@echo "### Linking $@"
 	$(CC) $(CCFLAGS) $^ $(LDFLAGS) -o $@
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.s | $(OBJDIRS)
+$(TARGETOBJDIR)/%.o: $(SRCDIR)/%.s | $(OBJDIRS)
 	@echo "### Assembling $@"
 	$(AS) $(CPPFLAGS) $(CCFLAGS) $(ASFLAGS) -o $@ -c $<
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIRS)
+$(TARGETOBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIRS)
 	@echo "### Building $@"
 	$(CC) $(CPPFLAGS) $(CCFLAGS) $(CFLAGS) -o $@ -c $<
 
 $(BINDIR) $(OBJDIRS):
 	mkdir -p $@
 
--include $(DEPS)
-
 clean:
-	rm -f $(OBJS)
-
-distclean:
-	rm -rf $(TOPDIR)/obj $(TOPDIR)/bin
+	rm -f $(OBJS) $(TARGET)
 
 .PRECIOUS: $(DEPS)
-.PHONY: depend distclean clean all
-
+.PHONY: clean all
