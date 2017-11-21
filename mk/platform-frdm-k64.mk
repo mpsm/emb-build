@@ -1,4 +1,4 @@
-include $(MKDIR)/kx.mk
+include $(MKDIR)/mcu-kx.mk
 
 SYSTEM= freertos
 FREERTOS_PORT= kx

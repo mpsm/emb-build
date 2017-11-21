@@ -1,0 +1,1 @@
+include $(MKDIR)/app.mk

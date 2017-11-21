@@ -1,7 +1,8 @@
 # in case mk file is called directly
 ifndef TOPDIR
-TOPDIR:= $(abspath $(dir $(lastword $(MAKEFILE_LIST)))../)
+TOPDIR:= $(dir $(lastword $(MAKEFILE_LIST)))../
 endif
+#$(info Topdir: $(TOPDIR))
 
 # the TOPDIR's trailing '/' is intentional
 SRCDIR:=  $(TOPDIR)src
