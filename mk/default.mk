@@ -26,10 +26,10 @@ override CC= $(TOOLCHAIN)-gcc
 override AS= $(CC) -x assembler-with-cpp
 
 # debug options
-ifndef CONFIG_DEBUG
-	CONFIG_DEBUG=0
+ifndef DEBUG
+	DEBUG=0
 endif
-ifeq ($(CONFIG_DEBUG), 1)
+ifeq ($(DEBUG), 1)
 	CFLAGS+= -O0 -g
 	CPPFLAGS+= -DDEBUG
 else
